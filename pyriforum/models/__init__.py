@@ -5,9 +5,9 @@ import zope.sqlalchemy
 
 # import or define all models here to ensure they are attached to the
 # Base.metadata prior to any initialization routines
-from .user import User  # flake8: noqa
-from .posts import Post  # flake8: noqa
-from .threads import Thread  # flake8: noqa
+from .user import User
+from .posts import Post
+from .threads import Thread
 
 # run configure_mappers after defining all of the models to ensure
 # all relationships can be setup
