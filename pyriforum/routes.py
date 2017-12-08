@@ -13,6 +13,7 @@ def includeme(config):
     config.add_route('home', '/', factory=authenticated_factory)
     config.add_route('login', '/login', factory=authenticated_factory)
     config.add_route('logout', '/logout', factory=authenticated_factory)
+    config.add_route('forums', '/forums', factory=authenticated_factory)
     #config.add_route('view_page', '/{pagename}', factory=page_factory)
     #config.add_route('add_page', '/add_page/{pagename}',
                      #factory=new_page_factory)

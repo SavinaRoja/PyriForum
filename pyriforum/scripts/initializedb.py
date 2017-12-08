@@ -16,7 +16,11 @@ from ..models import (
     get_session_factory,
     get_tm_session,
     )
-from ..models import User
+from ..models import (
+    Category,
+    Subcategory,
+    User,
+    )
 
 def usage(argv):
     cmd = os.path.basename(argv[0])
@@ -42,13 +46,39 @@ def main(argv=sys.argv):
         dbsession = get_tm_session(session_factory, transaction.manager)
 
         user = User(name='testy', email='testy@testerson.com')
-        user.set_password('secret')
-        #user.set_created_time()
+        user.set_password('testy')
         dbsession.add(user)
 
         basic = User(name='basic', email='basic@basicson.com')
         basic.set_password('basic')
-        #basic.set_created_time()
         dbsession.add(basic)
+        
+        general = Category(name='General')
+        announcements = Subcategory(name='Announcements',
+                                    description='General news and happenings')
+        updates = Subcategory(name='DevLog',
+                              description='Updates and ramblings of the dev team')
+        general.subcategories = [announcements, updates]
+        dbsession.add(general)
+        
+        suggestions = Category(name='Suggestions')
+        site_suggestions = Subcategory(name='Site Suggestions',
+                                       description='Have an idea for the site? Let\'s discuss!')
+        feedback = Subcategory(name='Feedback',
+                               description='Tell us how we are doing')
+        suggestions.subcategories = [site_suggestions, feedback]
+        dbsession.add(feedback)
+        
+        discussion = Category(name='Site Discussion')
+        general_chat = Subcategory(name='General Chat',
+                                   description='Discuss anything about the site')
+        originals = Subcategory(name='Original Work',
+                                description='Share what you\'ve done or are working on')
+        intros = Subcategory(name='Introductions',
+                             description='New to the site? Say hello!')
+        discussion.subcategories = [general_chat, originals, intros]
+        dbsession.add(discussion)
+        
+        
 
 

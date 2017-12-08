@@ -1,0 +1,24 @@
+{% extends 'layout.jinja2' %}
+
+{% block title %}Forums - {% endblock title %}
+
+{% block content %}
+<p>
+  <strong>Forums</strong>
+</p>
+{% for category in categories %}
+  <p><strong>{{category.name}}</strong></p>
+  <table>
+    <thead>
+      <th>Subcategory</th>
+      <th>Description</th>
+    </thead>
+  {% for subcat in category.subcategories %}
+  <tr>
+    <td>{{subcat.name}}</td>
+    <td>{{subcat.description}}</td>
+  </tr>
+  {% endfor %}
+  </table>
+{% endfor %}
+{% endblock content %}

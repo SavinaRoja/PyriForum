@@ -22,5 +22,6 @@ class Subcategory(Base):
     __tablename__ = 'subcategories'
     id = Column(Integer, primary_key=True)
     name = Column(Text, nullable=False)
+    description = Column(Text)
     category_id = Column(Integer, ForeignKey('categories.id'), nullable=False)
     category = relationship('Category', back_populates='subcategories')

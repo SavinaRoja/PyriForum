@@ -8,6 +8,7 @@ import zope.sqlalchemy
 from .user import User
 from .posts import Post
 from .threads import Thread
+from .categories import Category, Subcategory
 
 # run configure_mappers after defining all of the models to ensure
 # all relationships can be setup
