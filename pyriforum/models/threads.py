@@ -20,11 +20,13 @@ class Thread(Base):
     creator_id = Column(ForeignKey('users.id'), nullable=False)
     creator = relationship('User', backref='created_threads')
     title = Column(String(50))
-    category = Column(String(50), nullable=False)
-    subcategory = Column(String(50), nullable=False)
+    subcategory_id = Column(Integer, ForeignKey('subcategories.id'), nullable=False)
+    subcategory = relationship('Subcategory', back_populates='threads')
     created_at = Column(ArrowType, nullable=False)
     last_updated = Column(ArrowType, nullable=False)
 
     def __init__(self, *args, **kwargs):
         super(Thread, self).__init__(*args, **kwargs)
-        self.created_at = arrow.utcnow()
+        now = arrow.utcnow()
+        self.created_at = now
+        self.last_updated = now

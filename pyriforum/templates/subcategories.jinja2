@@ -1,0 +1,25 @@
+{% extends 'layout.jinja2' %}
+
+{% block title %}Subcategory - {% endblock title %}
+
+{% block content %}
+<p>
+  <strong>Viewing Subcategory: {{request.context.subcat.name}}</strong>
+</p>
+<table>
+  <thead>
+    <th>Title</th>
+    <th>Creator</th>
+    <th>Created At</th>
+    <th>Last Updated</th>
+  </thead>
+  {% for thread in threads %}
+  <tr>
+    <td>{{thread.title}}</td>
+    <td>{{thread.creator.name}}</td>
+    <td>{{thread.created_at}}</td>
+    <td>{{thread.last_updated}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock content %}

@@ -15,7 +15,7 @@
     </thead>
   {% for subcat in category.subcategories %}
   <tr>
-    <td>{{subcat.name}}</td>
+    <td><a href="{{request.route_url('view_subcategory', subcatid=subcat.id)}}">{{subcat.name}}</a></td>
     <td>{{subcat.description}}</td>
   </tr>
   {% endfor %}

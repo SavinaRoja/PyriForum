@@ -20,6 +20,8 @@ from ..models import (
     Category,
     Subcategory,
     User,
+    Thread,
+    Post,
     )
 
 def usage(argv):
@@ -45,6 +47,7 @@ def main(argv=sys.argv):
     with transaction.manager:
         dbsession = get_tm_session(session_factory, transaction.manager)
 
+        #Create a few test users
         user = User(name='testy', email='testy@testerson.com')
         user.set_password('testy')
         dbsession.add(user)
@@ -53,6 +56,7 @@ def main(argv=sys.argv):
         basic.set_password('basic')
         dbsession.add(basic)
         
+        #Create a few categories and subcategories for the forums
         general = Category(name='General')
         announcements = Subcategory(name='Announcements',
                                     description='General news and happenings')
@@ -78,6 +82,22 @@ def main(argv=sys.argv):
                              description='New to the site? Say hello!')
         discussion.subcategories = [general_chat, originals, intros]
         dbsession.add(discussion)
+        
+        #Add a few threads to the subcategories in the forums
+        version = Thread(title='New Version!')
+        version.subcategory = announcements
+        version.creator = user
+        dbsession.add(version)
+        opensource = Thread(title='We are open source')
+        opensource.subcategory = announcements
+        opensource.creator = user
+        dbsession.add(opensource)
+        
+        ramblings = Thread(title='Should I switch to SQLite', subcategory=updates, creator=basic)
+        dbsession.add(ramblings)
+        
+        
+        
         
         
 

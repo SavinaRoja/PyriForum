@@ -8,7 +8,12 @@ from pyramid.security import Authenticated
 
 from pyramid.view import view_config
 
-from ..models import User, Category, Subcategory
+from ..models import (
+    User,
+    Category,
+    Subcategory,
+    Thread,
+)
 
 @view_config(route_name='home', renderer='../templates/homepage.jinja2')
 def home(request):
@@ -18,4 +23,9 @@ def home(request):
 def forums(request):
     categories =request.dbsession.query(Category).all()
     return {'categories': categories}
+
+@view_config(route_name='view_subcategory', renderer='../templates/subcategories.jinja2')
+def view_subcategory(request):
+    subcat = request.context.subcat
+    return {'threads': subcat.threads}
         

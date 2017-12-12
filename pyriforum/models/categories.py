@@ -25,3 +25,4 @@ class Subcategory(Base):
     description = Column(Text)
     category_id = Column(Integer, ForeignKey('categories.id'), nullable=False)
     category = relationship('Category', back_populates='subcategories')
+    threads = relationship('Thread', back_populates='subcategory')
