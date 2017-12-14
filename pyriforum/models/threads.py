@@ -17,13 +17,20 @@ from .meta import Base
 class Thread(Base):
     __tablename__ = 'threads'
     id = Column(Integer, primary_key=True)
-    creator_id = Column(ForeignKey('users.id'), nullable=False)
-    creator = relationship('User', backref='created_threads')
     title = Column(String(50))
-    subcategory_id = Column(Integer, ForeignKey('subcategories.id'), nullable=False)
-    subcategory = relationship('Subcategory', back_populates='threads')
     created_at = Column(ArrowType, nullable=False)
     last_updated = Column(ArrowType, nullable=False)
+    
+    #Many to one relationship to Subcategory
+    subcategory_id = Column(Integer, ForeignKey('subcategories.id'), nullable=False)
+    subcategory = relationship('Subcategory', back_populates='threads')
+    
+    #Many to one relationship to Creator
+    creator_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    creator = relationship('User', back_populates='threads')
+    
+    #One to many relation to Post
+    posts = relationship('Post', back_populates='thread')
 
     def __init__(self, *args, **kwargs):
         super(Thread, self).__init__(*args, **kwargs)

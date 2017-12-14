@@ -17,15 +17,18 @@ from .meta import Base
 class Post(Base):
     __tablename__ = 'posts'
     id = Column(Integer, primary_key=True)
-    creator_id = Column(ForeignKey('users.id'), nullable=False)
-    creator = relationship('User', backref='created_posts')
-    thread_id = Column(ForeignKey('threads.id'), nullable=False)
-    thread = relationship('Thread', backref='thread_posts')
     created_at = Column(ArrowType, nullable=False)
     body = Column(Text, nullable=False)
+    
+    #Many to one relationship to User
+    creator_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    creator = relationship('User', back_populates='posts')
+    
+    #Many to one relationship to Thread
+    thread_id = Column(Integer, ForeignKey('threads.id'), nullable=False)
+    thread = relationship('Thread', back_populates='posts')
+
 
     def __init__(self, *args, **kwargs):
-        super(Thread, self).__init__(*args, **kwargs)
+        super(Post, self).__init__(*args, **kwargs)
         self.created_at = arrow.utcnow()
-
-Index('my_index', Post.thread_id, Post.created_at)

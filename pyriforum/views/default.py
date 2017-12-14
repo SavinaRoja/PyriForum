@@ -19,13 +19,4 @@ from ..models import (
 def home(request):
     return dict()
 
-@view_config(route_name='forums', renderer='../templates/forums.jinja2')
-def forums(request):
-    categories =request.dbsession.query(Category).all()
-    return {'categories': categories}
-
-@view_config(route_name='view_subcategory', renderer='../templates/subcategories.jinja2')
-def view_subcategory(request):
-    subcat = request.context.subcat
-    return {'threads': subcat.threads}
         

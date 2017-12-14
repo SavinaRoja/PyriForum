@@ -7,6 +7,7 @@ from sqlalchemy import (
     Text,
 )
 from sqlalchemy_utils import ArrowType
+from sqlalchemy.orm import relationship
 
 import bcrypt
 import arrow
@@ -21,6 +22,12 @@ class User(Base):
     email = Column(String(120), unique=True)
     pw_hash = Column(Text)
     created_at = Column(ArrowType, nullable=False)
+    
+    #One to many relationship to Post
+    posts = relationship('Post', back_populates='creator')
+    
+    #One to many relationship to Thread
+    threads = relationship('Thread', back_populates='creator')
 
     def __init__(self, *args, **kwargs):
         super(User, self).__init__(*args, **kwargs)

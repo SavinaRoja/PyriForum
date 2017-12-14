@@ -15,7 +15,7 @@
   </thead>
   {% for thread in threads %}
   <tr>
-    <td>{{thread.title}}</td>
+    <td><a href="{{request.route_url('view_thread', threadid=thread.id)}}">{{thread.title}}</a></td>
     <td>{{thread.creator.name}}</td>
     <td>{{thread.created_at}}</td>
     <td>{{thread.last_updated}}</td>

@@ -48,9 +48,9 @@ def main(argv=sys.argv):
         dbsession = get_tm_session(session_factory, transaction.manager)
 
         #Create a few test users
-        user = User(name='testy', email='testy@testerson.com')
-        user.set_password('testy')
-        dbsession.add(user)
+        testy = User(name='testy', email='testy@testerson.com')
+        testy.set_password('testy')
+        dbsession.add(testy)
 
         basic = User(name='basic', email='basic@basicson.com')
         basic.set_password('basic')
@@ -84,18 +84,35 @@ def main(argv=sys.argv):
         dbsession.add(discussion)
         
         #Add a few threads to the subcategories in the forums
-        version = Thread(title='New Version!')
-        version.subcategory = announcements
-        version.creator = user
+        version = Thread(title='New Version!', subcategory=announcements, creator=testy)
         dbsession.add(version)
-        opensource = Thread(title='We are open source')
-        opensource.subcategory = announcements
-        opensource.creator = user
+        opensource = Thread(title='We are open source', subcategory=announcements, creator=testy)
         dbsession.add(opensource)
         
         ramblings = Thread(title='Should I switch to SQLite', subcategory=updates, creator=basic)
         dbsession.add(ramblings)
         
+        hunter2 = Thread(title='The story of hunter2', subcategory=general_chat, creator=testy)
+        hunter2.posts = [Post(creator=testy, body='hey, if you type in your pw, it will show as stars'),
+                         Post(creator=testy, body='********* see!'),
+                         Post(creator=basic, body='hunter2'),
+                         Post(creator=basic, body='doesnt look like stars to me'),
+                         Post(creator=testy, body='<basic> *******'),
+                         Post(creator=testy, body='thats what I see'),
+                         Post(creator=basic, body='oh, really?'),
+                         Post(creator=testy, body='Absolutely'),
+                         Post(creator=basic, body='you can go hunter2 my hunter2-ing hunter2'),
+                         Post(creator=basic, body='haha, does that look funny to you?'),
+                         Post(creator=testy, body='lol, yes. See, when YOU type hunter2, it shows to us as *******'),
+                         Post(creator=basic, body='thats neat, I didnt know IRC did that'),
+                         Post(creator=testy, body='yep, no matter how many times you type hunter2, it will show to us as *******'),
+                         Post(creator=basic, body='awesome!'),
+                         Post(creator=basic, body='wait, how do you know my pw?'),
+                         Post(creator=testy, body='er, I just copy pasted YOUR ******\'s and it appears to YOU as hunter2 cause its your pw'),
+                         Post(creator=basic, body='oh, ok.')]
+        dbsession.add(hunter2)
+        
+
         
         
         

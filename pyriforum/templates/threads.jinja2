@@ -1,0 +1,23 @@
+{% extends 'layout.jinja2' %}
+
+{% block title %}Thread - {% endblock title %}
+
+{% block content %}
+<p>
+  <strong>Viewing Thread: {{thread.title}}</strong>
+</p>
+<table>
+  <thead>
+    <th>Creator</th>
+    <th>Body</th>
+    <th>Created At</th>
+  </thead>
+  {% for post in thread.posts %}
+  <tr>
+    <td>{{post.creator.name}}</td>
+    <td>{{post.body}}</td>
+    <td>{{post.created_at}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock content %}

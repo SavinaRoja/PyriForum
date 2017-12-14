@@ -21,11 +21,6 @@ def includeme(config):
     config.add_route('forums', '/forums', factory=authenticated_factory)
     config.add_route('view_subcategory', '/forums/subcategory/{subcatid}', factory=subcat_factory)
     config.add_route('view_thread', '/forums/thread/{threadid}', factory=thread_factory)
-    #config.add_route('view_page', '/{pagename}', factory=page_factory)
-    #config.add_route('add_page', '/add_page/{pagename}',
-                     #factory=new_page_factory)
-    #config.add_route('edit_page', '/{pagename}/edit_page',
-                     #factory=page_factory)
 
 def authenticated_factory(request):
     return AuthenticatedACL()
@@ -54,7 +49,7 @@ def thread_factory(request):
     thread = request.dbsession.query(Thread).get(threadid)
     if thread is None:
         raise HTTPNotFound
-    return SubcatResource(thread)
+    return ThreadResource(thread)
 
 
 #def new_page_factory(request):
