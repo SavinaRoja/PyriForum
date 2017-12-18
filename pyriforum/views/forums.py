@@ -10,6 +10,7 @@ from pyramid.view import view_config
 
 from ..models import (
     User,
+    Post,
     Category,
     Subcategory,
     Thread,
@@ -28,4 +29,8 @@ def view_subcategory(request):
 @view_config(route_name='view_thread', renderer='../templates/threads.jinja2')
 def view_thread(request):
     thread = request.context.thread
+    user = thread.user
+    if 'form.submitted' in request.params:
+        body = request.params['post_body']
+        new_post = Post(user=user, body=body)
     return {'thread': thread}
