@@ -9,6 +9,7 @@ def main(global_config, **settings):
     config.include('.models')
     config.include('.routes')
     config.include('.security')
+    config.include('.views.forums')
     config.set_default_permission('view')
     config.scan()
     return config.make_wsgi_app()

@@ -56,7 +56,7 @@ def includeme(config):
     """
     Initialize the model for a Pyramid app.
 
-    Activate this setup using ``config.include('savinarojanet.models')``.
+    Activate this setup using ``config.include('pyriforum.models')``.
 
     """
     settings = config.get_settings()
