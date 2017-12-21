@@ -104,3 +104,6 @@ ENV/
 *.kdev
 *.kdev4
 .kdev4/
+
+# UWSGI files
+*.pid

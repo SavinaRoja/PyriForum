@@ -60,6 +60,7 @@ setup(
         ],
         'console_scripts': [
             'initialize_pyriforum_db = pyriforum.scripts.initializedb:main',
+            'add_user = pyriforum.scripts.add_user:main',
         ],
     },
 )
